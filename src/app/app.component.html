@@ -1,8 +1,17 @@
 <hello name="{{ name }}"></hello>
 <p>
-	Start editing to see some magic happen :)
+	Angular app explaining dependency injection in details
 </p>
 
-<ng-container>
-	{{custom|json}}
-</ng-container>
+<hr>
+<hr>
+<hr>
+
+
+<div class="comp-with-state" *ngIf="toggle">
+<app-comp-with-state></app-comp-with-state>
+</div>
+
+<button (click)="toggleFunc()">
+Click to  {{toggle?'destroy':'create'}} components instance
+</button>

@@ -1,0 +1,15 @@
+.container.comp{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 10px solid red;
+  background-color: red;
+}
+
+.submit-btn{
+  margin-top:10px;
+  text-align: center;
+}
+.error-cls{
+  color:red;
+}

@@ -1,6 +1,5 @@
 import { Component, VERSION,OnInit } from '@angular/core';
 
-@customdecorator
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
@@ -8,6 +7,7 @@ import { Component, VERSION,OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   custom:string;
+   toggle:boolean = true;
   name = 'Angular ' + VERSION.major;
   constructor(){
     
@@ -15,9 +15,8 @@ export class AppComponent implements OnInit {
   ngOnInit(){
 
   }
-}
 
-function customdecorator(target,...args){
-  target.ngOnDestroy = {hritik:'hello'}
-  console.log(target)
+    toggleFunc():void{
+    this.toggle = !this.toggle;
+  }
 }

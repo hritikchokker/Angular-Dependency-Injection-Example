@@ -1,3 +1,14 @@
 p {
   font-family: Lato;
 }
+
+.comp-with-state{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  padding:20px;
+  height: 500px;
+  border:2px solid red;
+}
+
