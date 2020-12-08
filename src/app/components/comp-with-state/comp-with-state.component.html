@@ -1,71 +1,67 @@
+<div class="container-comp">
 
-<div class="container-comp"> 
-  top
-  <p>
-  comp-with-state-works
-</p>
-<h4>
-  Component with state click to destory or constructs the instance of the Component
-  but the data will remain saved
-</h4>
-<ng-container *ngIf="_storage?.usersBasicDetails">
-<h1 >Users Details</h1>
-Short Name: {{_storage?.usersBasicDetails?.shortName}}
-<br>
+	<h4>
+		Component with state click to destory or constructs the instance of the Component
+		but the data will remain saved
+	</h4>
+	<ng-container *ngIf="_storage?.usersBasicDetails">
+		<h1>Users Details will be saved even if its components instance is destroyed</h1>
+		Short Name: {{_storage?.usersBasicDetails?.shortName}}
+		<br>
 Full Name: {{_storage?.usersBasicDetails?.fullName}}
-<br>
+		<br>
 Location: {{_storage?.usersBasicDetails?.location}}
-<br>
+		<br>
 Highest Degree: {{_storage?.usersBasicDetails?.highestDegree}}
-<br>
+		<br>
 </ng-container>
-  <form [formGroup]="userBasicDetailsForm" (ngSubmit)="onSubmit()">
+		<form [formGroup]="userBasicDetailsForm" (ngSubmit)="onSubmit()">
 
-    <div>
-      <label> Short Name</label>
-      <input type="text" formControlName="shortName" />
-      <ng-container *ngIf="f.shortName.hasError('required') && !f.shortName.pristine && f.shortName.invalid">
-        <span class="error-cls">
+			<div>
+				<label> Short Name</label>
+				<input type="text" formControlName="shortName" />
+				<ng-container *ngIf="f.shortName.hasError('required') && !f.shortName.pristine && f.shortName.invalid">
+					<span class="error-cls">
         Short Name is required
         </span>
-      </ng-container>
-  </div>
-  <br>
-   <div>
-      <label> Full Name </label>
-      <input type="text" formControlName="fullName" />
-       <ng-container *ngIf="f.fullName.hasError('required') && !f.fullName.pristine && f.fullName.invalid">
-        <span class="error-cls">
+				</ng-container>
+			</div>
+			<br>
+			<div>
+				<label> Full Name </label>
+				<input type="text" formControlName="fullName" />
+				<ng-container *ngIf="f.fullName.hasError('required') && !f.fullName.pristine && f.fullName.invalid">
+					<span class="error-cls">
         Full Name is required
         </span>
-      </ng-container>
-  </div>
-  <br>
-  <div>
-      <label> Location </label>
-      <input type="text" formControlName="location" />
-       <ng-container *ngIf="f.location.hasError('required') && f.location.dirty">
-        <span class="error-cls">
+				</ng-container>
+			</div>
+			<br>
+			<div>
+				<label> Location </label>
+				<input type="text" formControlName="location" />
+				<ng-container *ngIf="f.location.hasError('required') && f.location.dirty">
+					<span class="error-cls">
         location is required
         </span>
-      </ng-container>
-  </div>
-  <br>
-   <div>
-      <label> Highest Degree </label>
-      <input type="text" formControlName="highestDegree" />
-       <ng-container *ngIf="f.highestDegree.hasError('required') && !f.highestDegree.pristine && f.highestDegree.invalid">
-        <span class="error-cls">
+				</ng-container>
+			</div>
+			<br>
+			<div>
+				<label> Highest Degree </label>
+				<input type="text" formControlName="highestDegree" />
+				<ng-container
+					*ngIf="f.highestDegree.hasError('required') && !f.highestDegree.pristine && f.highestDegree.invalid">
+					<span class="error-cls">
         highest Degree is required
         </span>
-      </ng-container>
-  </div>
-  <div class="submit-btn">
-  <button type="submit">
+				</ng-container>
+			</div>
+			<div class="submit-btn">
+				<button type="submit">
     Submit
   </button>
-  </div>
-  </form>
+			</div>
+		</form>
 
 </div>
-

@@ -2,13 +2,40 @@ p {
   font-family: Lato;
 }
 
-.comp-with-state{
+.comp-with-state {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 700px;
-  padding:20px;
+  padding: 20px;
   height: 500px;
-  border:2px solid red;
+  border: 2px solid red;
 }
 
+.top-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dynamic-content {
+  display: block;
+}
+
+.top-navbar-list {
+  list-style: none;
+}
+.top-navbar-list-item {
+  float: left;
+  padding: 8px;
+  margin: 6px;
+
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.top-navbar-list-item:hover {
+  transform: scale(1.2);
+  border: none;
+  color: blue;
+}
