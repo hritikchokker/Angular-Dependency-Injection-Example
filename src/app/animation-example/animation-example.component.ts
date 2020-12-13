@@ -1,13 +1,17 @@
-import {Component} from '@angular/core';
+import { Component } from "@angular/core";
+import { openCloseAnimation } from "../reusable-animations/open-close.animation";
 
 @Component({
-  selector:'app-animation-example',
-  templateUrl:'./animation-example.component.html',
-  styleUrls:['./animation-example.component.css']
+  selector: "app-animation-example",
+  templateUrl: "./animation-example.component.html",
+  styleUrls: ["./animation-example.component.css"],
+  animations: [openCloseAnimation]
 })
-export class AnimationExampleComponent{
+export class AnimationExampleComponent {
+  isOpen = false;
 
-  constructor(){
-
+  toggle() {
+    this.isOpen = !this.isOpen;
   }
+  constructor() {}
 }
