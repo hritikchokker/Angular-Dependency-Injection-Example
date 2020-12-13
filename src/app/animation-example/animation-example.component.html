@@ -2,7 +2,8 @@
 	animaton-example-works!
 </p>
 
-<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+<div [@openClose]="isOpen ? 'open' : 'closed'" (@openClose.start)="onAnimationEvent($event)"
+	(@openClose.done)="onAnimationEvent($event)" class="open-close-container">
 	<p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
 </div>
 
@@ -23,3 +24,12 @@
 	in this above example setting styles property opacity to * means set whatever
 	value to this which is currently assigned to it
 </p> -->
+
+
+<!-- @.disabled disables all the animations on the container as well as its child -->
+<!-- <div [@.disabled]="isDisabled">
+  <div [@childAnimation]="isOpen ? 'open' : 'closed'"
+    class="open-close-container">
+    <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+  </div>
+</div> -->

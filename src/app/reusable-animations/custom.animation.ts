@@ -3,11 +3,13 @@ import {
   state,
   style,
   animate,
+  stagger,
+  query,
   transition
   // ...
 } from "@angular/animations";
 
-export const openCloseAnimation = trigger("openClose", [
+export const openCloseTrigger = trigger("openClose", [
   state(
     "open",
     style({
@@ -43,7 +45,7 @@ export const openCloseAnimation = trigger("openClose", [
 //   animate('0.5s')
 // ]),
 
-export const transitionTriggersExample = trigger("openClose", [
+export const transitionTrigger = trigger("openClose", [
   state(
     "open",
     style({
@@ -86,4 +88,31 @@ export const insertRemoveTrigger = trigger("myInsertRemoveTrigger", [
     animate("100ms", style({ opacity: 1 }))
   ]),
   transition(":leave", [animate("100ms", style({ opacity: 0 }))])
+]);
+
+// Note that this example doesn't need to use state().
+
+// :increment and :decrement in transitions
+
+export const filterAnimationTrigger = trigger("filterAnimation", [
+  transition(":enter, * => 0, * => -1", []),
+  transition(":increment", [
+    query(
+      ":enter",
+      [
+        style({ opacity: 0, width: "0px" }),
+        stagger(50, [
+          animate("300ms ease-out", style({ opacity: 1, width: "*" }))
+        ])
+      ],
+      { optional: true }
+    )
+  ]),
+  transition(":decrement", [
+    query(":leave", [
+      stagger(50, [
+        animate("300ms ease-out", style({ opacity: 0, width: "0px" }))
+      ])
+    ])
+  ])
 ]);
