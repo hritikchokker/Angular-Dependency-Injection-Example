@@ -1,9 +1,9 @@
 <p>
-  animaton-example-works!
+	animaton-example-works!
 </p>
 
 <div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
-  <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+	<p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
 </div>
 
 <button (click)="toggle()">
@@ -15,11 +15,11 @@
   transition('open <=> closed', [ animate('0.5s') ]),
 </code> -->
 
-<code>
-  <!-- transition ('* => open', [ animate ('1s', style ({ opacity: '*' }), ), ]) -->
-</code>
-<!-- 
+<!-- <h4>
+	transition ('* => open', [ animate ('1s', style ({ opacity: '*' }), ), ])
+</h4>
+
 <p>
-  in this above example setting styles property opacity to * means set whatever
-  value to this which is currently assigned to it
+	in this above example setting styles property opacity to * means set whatever
+	value to this which is currently assigned to it
 </p> -->

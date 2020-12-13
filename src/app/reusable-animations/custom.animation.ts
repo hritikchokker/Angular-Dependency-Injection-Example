@@ -69,5 +69,21 @@ export const transitionTriggersExample = trigger("openClose", [
   transition("* => *", [animate("1s")])
 ]);
 
+export const flyInOutTrigger = trigger("flyInOut", [
+  state("in", style({ transform: "translateX(0)" })),
+  transition("void => *", [
+    style({ transform: "translateX(-100%)" }),
+    animate(100)
+  ]),
+  transition("* => void", [
+    animate(100, style({ transform: "translateX(100%)" }))
+  ])
+]);
 
-export const 
+export const insertRemoveTrigger = trigger("myInsertRemoveTrigger", [
+  transition(":enter", [
+    style({ opacity: 0 }),
+    animate("100ms", style({ opacity: 1 }))
+  ]),
+  transition(":leave", [animate("100ms", style({ opacity: 0 }))])
+]);
