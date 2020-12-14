@@ -9,6 +9,7 @@ import {
   transition
   // ...
 } from "@angular/animations";
+import { RouterOutlet } from "@angular/router";
 
 interface AnimationEvent {
   fromState: string;
@@ -74,4 +75,12 @@ export class AnimationExampleComponent {
     // the HTML element itself, the button in this case
     console.warn(`Element: ${event.element}`);
   }
+
+// <div [@routeAnimations]="prepareRoute(outlet)">
+//   <router-outlet #outlet="outlet"></router-outlet>
+// </div>
+  prepareRoute(outlet: RouterOutlet) {
+  return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
 }
+}
+

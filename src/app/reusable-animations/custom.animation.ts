@@ -3,7 +3,11 @@ import {
   state,
   style,
   animate,
+  keyframes,
+  group,
   stagger,
+  animateChild,
+  animation,
   query,
   transition
   // ...
@@ -116,3 +120,257 @@ export const filterAnimationTrigger = trigger("filterAnimation", [
     ])
   ])
 ]);
+
+// transition('* => active', [
+//   animate('2s', keyframes([
+//     style({ backgroundColor: 'blue' }),
+//     style({ backgroundColor: 'red' }),
+//     style({ backgroundColor: 'orange' })
+//   ]))
+
+// transition('* => active', [
+//   animate('2s', keyframes([
+//     style({ backgroundColor: 'blue', offset: 0}),
+//     style({ backgroundColor: 'red', offset: 0.8}),
+//     style({ backgroundColor: 'orange', offset: 1.0})
+//   ])),
+// ]),
+// transition('* => inactive', [
+//   animate('2s', keyframes([
+//     style({ backgroundColor: 'orange', offset: 0}),
+//     style({ backgroundColor: 'red', offset: 0.2}),
+//     style({ backgroundColor: 'blue', offset: 1.0})
+//   ]))
+// ]),
+
+export const advancedOpenCloseTrigger = trigger("openClose", [
+  state(
+    "open",
+    style({
+      height: "200px",
+      opacity: 1,
+      backgroundColor: "yellow"
+    })
+  ),
+  state(
+    "close",
+    style({
+      height: "100px",
+      opacity: 0.5,
+      backgroundColor: "green"
+    })
+  ),
+  // ...
+  transition("* => *", [
+    animate(
+      "1s",
+      keyframes([
+        style({ opacity: 0.1, offset: 0.1 }),
+        style({ opacity: 0.6, offset: 0.2 }),
+        style({ opacity: 1, offset: 0.5 }),
+        style({ opacity: 0.2, offset: 0.7 })
+      ])
+    )
+  ])
+]);
+
+export const shrinkOutTrigger = trigger("shrinkOut", [
+  state("in", style({ height: "*" })),
+  transition("* => void", [
+    style({ height: "*" }),
+    animate(250, style({ height: 0 }))
+  ])
+]);
+
+export const pageAnimationTrigger = trigger("pageAnimations", [
+  transition(":enter", [
+    query(".hero, form", [
+      style({ opacity: 0, transform: "translateY(-100px)" }),
+      stagger(-30, [
+        animate(
+          "500ms cubic-bezier(0.35, 0, 0.25, 1)",
+          style({ opacity: 1, transform: "none" })
+        )
+      ])
+    ])
+  ])
+]);
+
+export const flyInOutGroupTrigger = trigger("flyInOut", [
+  state(
+    "in",
+    style({
+      width: 120,
+      transform: "translateX(0)",
+      opacity: 1
+    })
+  ),
+  transition("void => *", [
+    style({ width: 10, transform: "translateX(50px)", opacity: 0 }),
+    group([
+      animate(
+        "0.3s 0.1s ease",
+        style({
+          transform: "translateX(0)",
+          width: 120
+        })
+      ),
+      animate(
+        "0.3s ease",
+        style({
+          opacity: 1
+        })
+      )
+    ])
+  ]),
+  transition("* => void", [
+    group([
+      animate(
+        "0.3s ease",
+        style({
+          transform: "translateX(50px)",
+          width: 10
+        })
+      ),
+      animate(
+        "0.3s 0.2s ease",
+        style({
+          opacity: 0
+        })
+      )
+    ])
+  ])
+]);
+
+export const filterAnimationComplexTrigger = trigger("filterAnimation", [
+  transition(":enter, * => 0, * => -1", []),
+  transition(":increment", [
+    query(
+      ":enter",
+      [
+        style({ opacity: 0, width: "0px" }),
+        stagger(50, [
+          animate("300ms ease-out", style({ opacity: 1, width: "*" }))
+        ])
+      ],
+      { optional: true }
+    )
+  ]),
+  transition(":decrement", [
+    query(":leave", [
+      stagger(50, [
+        animate("300ms ease-out", style({ opacity: 0, width: "0px" }))
+      ])
+    ])
+  ])
+]);
+
+export const transAnimation = animation([
+  style({
+    height: "{{ height }}",
+    opacity: "{{ opacity }}",
+    backgroundColor: "{{ backgroundColor }}"
+  }),
+  animate("{{ time }}")
+]);
+
+//  transition('open => closed', [
+//         useAnimation(transAnimation, {
+//           params: {
+//             height: 0,
+//             opacity: 1,
+//             backgroundColor: 'red',
+//             time: '1s'
+//           }
+//         })
+
+export const slideInAnimation = trigger("routeAnimations", [
+  transition("HomePage <=> AboutPage", [
+    style({ position: "relative" }),
+    query(":enter, :leave", [
+      style({
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%"
+      })
+    ]),
+    query(":enter", [style({ left: "-100%" })]),
+    query(":leave", animateChild()),
+    group([
+      query(":leave", [animate("300ms ease-out", style({ left: "100%" }))]),
+      query(":enter", [animate("300ms ease-out", style({ left: "0%" }))])
+    ]),
+    query(":enter", animateChild())
+  ]),
+  transition("* <=> FilterPage", [
+    style({ position: "relative" }),
+    query(":enter, :leave", [
+      style({
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%"
+      })
+    ]),
+    query(":enter", [style({ left: "-100%" })]),
+    query(":leave", animateChild()),
+    group([
+      query(":leave", [animate("200ms ease-out", style({ left: "100%" }))]),
+      query(":enter", [animate("300ms ease-out", style({ left: "0%" }))])
+    ]),
+    query(":enter", animateChild())
+  ])
+]);
+
+// query(':enter', [
+//     style({ left: '-100%' })
+//   ]),
+//   query(':leave', animateChild()),
+//   group([
+//     query(':leave', [
+//       animate('300ms ease-out', style({ left: '100%' }))
+//     ]),
+//     query(':enter', [
+//       animate('300ms ease-out', style({ left: '0%' }))
+//     ])
+//   ]),
+//   query(':enter', animateChild()),
+// ]),
+// transition('* <=> FilterPage', [
+//   style({ position: 'relative' }),
+//   query(':enter, :leave', [
+//     style({
+//       position: 'absolute',
+//       top: 0,
+//       left: 0,
+//       width: '100%'
+//     })
+//   ]),
+//   query(':enter', [
+//     style({ left: '-100%' })
+//   ]),
+//   query(':leave', animateChild()),
+//   group([
+//     query(':leave', [
+//       animate('200ms ease-out', style({ left: '100%' }))
+//     ]),
+//     query(':enter', [
+//       animate('300ms ease-out', style({ left: '0%' }))
+//     ])
+//   ]),
+//   query(':enter', animateChild()),
+// ])
+
+// export const routeAnimationTrigger =trigger('routeAnimations', [
+// transition('HomePage <=> AboutPage', [
+//   style({ position: 'relative' }),
+//   query(':enter, :leave', [
+//     style({
+//       position: 'absolute',
+//       top: 0,
+//       left: 0,
+//       width: '100%'
+//     })
+//   ])
+// ])
