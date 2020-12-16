@@ -4,11 +4,9 @@ import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
   {
-    path: "animation-example",
-    loadChildren: () =>
-      import("./animation-example/animation-example.module").then(
-        m => m.AnimationExampleModule
-      )
+    path:'login-form',
+    loadChildren:()=>import('./login-form/login-form.module')
+    .then(m=>m.LoginFormModule)
   }
 ];
 
