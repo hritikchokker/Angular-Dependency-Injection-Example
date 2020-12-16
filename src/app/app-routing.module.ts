@@ -1,25 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import { CompWithStateComponent } from './components/comp-with-state/comp-with-state.component';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule, Routes } from "@angular/router";
 
-const routes:Routes =[
+const routes: Routes = [
   {
-    path:'state-save',
-    component:CompWithStateComponent
-  },
-  {
-    path:'user',
-    loadChildren:()=>import('./user/user.module').then(m=>m.UserModule)
+    path:'login-form',
+    loadChildren:()=>import('./login-form/login-form.module')
+    .then(m=>m.LoginFormModule)
   }
-]
+];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports:[RouterModule],
+  imports: [CommonModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
   declarations: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
